@@ -1,13 +1,24 @@
 import sys
 
-import seaborn
-
 from PyQt4 import QtGui, QtCore
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas, NavigationToolbar2QT as NavigationToolbar
 
 from functools import partial
 from . import plotting
 from .loader import load_from_xls
+
+
+ABOUT_TITLE = 'Pytbul - visualisation de bulletins scolaires'
+ABOUT_URL = 'https://github.com/AlexandreDecan/pytbul'
+ABOUT_CONTENT = '\n'.join([
+    ABOUT_TITLE + ' (Alexandre Decan, 2016)',
+    '',
+    'Cette application est distribuée sous les termes de la Licence Publique Générale GNU, v3.0.',
+    'Une copie des termes de cette licence vous a été remise en même temps que cette application, et est également'
+    'disponible en ligne à l\'adresse http://www.gnu.org/licenses/gpl-3.0.fr.html.',
+    '',
+    'Le code source de cette application est disponible à l\'adresse ' + ABOUT_URL + '.',
+])
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -52,6 +63,16 @@ class MainWindow(QtGui.QMainWindow):
         self.menu_quit = QtGui.QAction('&Quitter', fileMenu)
         self.menu_quit.triggered.connect(QtGui.qApp.quit)
         fileMenu.addAction(self.menu_quit)
+
+        # About
+        help_menu = self.menuBar().addMenu('&Aide')
+        github = QtGui.QAction('Site web', help_menu)
+        github.triggered.connect(lambda: QtGui.QDesktopServices.openUrl(QtCore.QUrl(ABOUT_URL)))
+        about = QtGui.QAction('&À propos', help_menu)
+        about.triggered.connect(lambda: QtGui.QMessageBox.about(self, ABOUT_TITLE, ABOUT_CONTENT))
+        help_menu.addAction(github)
+        help_menu.addAction(about)
+
 
         self.update_ui()
 
