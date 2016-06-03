@@ -5,7 +5,6 @@ from functools import partial
 from . import plotting
 from .loader import load_from_xls
 
-
 ABOUT_TITLE = 'Pytbul - visualisation de bulletins scolaires'
 ABOUT_URL = 'https://github.com/AlexandreDecan/pytbul'
 ABOUT_CONTENT = '\n'.join([
