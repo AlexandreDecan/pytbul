@@ -181,8 +181,8 @@ class DetachablePlotFrame(QtWidgets.QFrame):
         self.resize(600, 400)
 
     def save_plot(self):
-        filepath = QtWidgets.QFileDialog.getSaveFileName(self, 'Enregistrer le graphique', filter='*.png')
-        if filepath:
+        filepath, ok = QtWidgets.QFileDialog.getSaveFileName(self, 'Enregistrer le graphique', filter='*.png')
+        if ok:
             self.figure.savefig(filepath, bbox_inches='tight')
 
     def detach_plot(self):
