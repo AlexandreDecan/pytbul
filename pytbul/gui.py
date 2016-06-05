@@ -18,6 +18,24 @@ ABOUT_CONTENT = '\n'.join([
 ])
 
 
+class GenericThread(QtCore.QThread):
+    taskFinished = QtCore.pyqtSignal()
+
+    def __init__(self, func, *args, **kwargs):
+        super().__init__()
+        self._func = func
+        self._args = args
+        self._kwargs = kwargs
+        self.result = None
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        self.result = self._func(*self._args, **self._kwargs)
+        self.taskFinished.emit()
+
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
