@@ -2,4 +2,4 @@ pyexcel-xls>=0.1.0
 pandas>=0.18.1
 matplotlib>=1.5.1
 seaborn>=0.7.0
-
+pyqt5>=5.7.0
